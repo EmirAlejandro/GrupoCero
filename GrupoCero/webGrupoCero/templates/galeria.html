@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/galeria-blog.css' %}">
+{% endblock css %}
+
+
+<body>
+
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>“El arte es, sobre todo, un estado del alma.” Marc Chagall (1887-1985).</h2>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido A Nuestra Bella Galeria de Arte</h2>
+            <p>Una obra de arte nunca se termina, sólo se abandona. - Leonardo da Vinci
+            </p>
+
+        </section>
+
+        <!--blog de arte-->
+        <section id="blog">
+            <div class="container">
+                <div class="card">
+                    <figure>
+                        <a href="{% static 'img/obra9.PNG' %}" title="Nenufares (1926) - Claude Monet"
+                            data-lightbox="obra3">
+                            <img src="{% static 'img/obra9.PNG' %}" alt="">
+                        </a>
+                    </figure>
+                    <div class="contenido">
+                        <h3>Nenufares</h3>
+                        <p>Autor: Claude Monet</p>
+                        <p>Tecnica Usada: Pintura Realizada a Mano.</p>
+                        <p>Precio: 70 Millones de dolares.</p>
+                        <p>Historia: La serie "Los nenúfares" es una colección de alrededor de 250 pinturas al óleo
+                            realizadas por el pintor impresionista Claude Monet al final de su vida. Las obras, que
+                            se exhiben en el Museo de la Orangerie de las Tullerías en París, representan un lago
+                            con agua y se basan en el Jardín de Giverny, donde Monet vivió con su familia y
+                            construyó una finca en 1890. Monet creó un estanque en este jardín que sirvió como
+                            modelo para sus famosos nenúfares.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <figure>
+                        <a href="{% static 'img/obra12.PNG' %}" title="Las Señoritas de Avignon (1907) - Pablo Picasso"
+                            data-lightbox="obra3">
+                            <img src="{% static 'img/obra12.PNG' %}" alt="">
+                        </a>
+                    </figure>
+                    <div class="contenido">
+                        <h3>Las Señoritas de Avignon</h3>
+                        <p>Autor: Pablo Picasso</p>
+                        <p>Tenica Usada: Pintura Realizada a Mano </p>
+                        <p>Precio: 106.5 millones de dolares. </p>
+                        <p>Historia: "Las señoritas de Avignon" es una obra de arte realizada por Pablo Picasso, que
+                            muestra a cinco prostitutas de la calle de Avinyó en Barcelona. La obra es considerada
+                            como proto-cubista, ya que el movimiento aún no existía en ese momento. Picasso se
+                            inspiró en tres influencias fundamentales: Cezánne, El Greco y el arte primitivo, para
+                            romper con las convenciones del realismo y la anatomía humana. Aunque la obra puede
+                            interpretarse como una advertencia sobre los peligros de las enfermedades venéreas, la
+                            intención original de Picasso no era moral, sino más bien explorar la potencia visual
+                            del lienzo. La obra cambió para siempre el arte de vanguardia y dio lugar al surgimiento
+                            del cubismo. </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <figure>
+                        <a href="{% static 'img/obra13.PNG' %}"
+                            title="El Nacimiento de Venus (1485) - Sandro Botticelli" data-lightbox="obra3">
+                            <img src="{% static 'img/obra13.PNG' %}" alt="">
+                        </a>
+                    </figure>
+                    <div class="contenido">
+                        <h3>El Nacimiento de Venus</h3>
+                        <p>Autor: Sandro Botticelli</p>
+                        <p>Tecnica Usada: Pintura Realizada a Mano</p>
+                        <p>Precio: 92 Millones de dolares</p>
+                        <p>Historia: Botticelli fue uno de los primeros artistas occidentales en pintar temas no
+                            religiosos y desnudos femeninos de personajes no bíblicos, lo que se relaciona con la
+                            idea del Renacimiento de considerar la pintura como fuente de placer para los sentidos y
+                            la belleza del cuerpo humano. Sin embargo, la pintura de Botticelli no está
+                            completamente libre de religiosidad, ya que el artista tomó una imagen pagana y la
+                            transformó en una imagen que podía interpretarse en clave del cristianismo de la época,
+                            gracias a su conocimiento de los pensadores neoplatónicos ligados a Lorenzo de Médici,
+                            su mecenas.</p>
+                    </div>
+                </div>
+        </section>
+
+
+        <section id="galeria">
+            <h3>
+                <h3>Galeria de nuestras explendidas obras: {{cantidad}}</h3>
+            </h3>
+            <div class="contenedor">
+                {% for item in obras %}
+                <article>
+                    <a href="{% url 'FICHA_OBRA' item.idObra %}">
+                        <img src="{{item.foto.url}}" alt="">
+                    </a>
+                    <h4>{{item.nombre}}</h4>
+                </article>
+                {% endfor %}
+                
+            </div>
+        </section>
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+    
+</body>
+
+</html>

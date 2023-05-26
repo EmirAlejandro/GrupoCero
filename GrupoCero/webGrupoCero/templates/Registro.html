@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>“La obra de arte es un grito de libertad.” Christo Javacheff (1935-2020).</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido al Formulario de Inscripcion </h2>
+            <p> Forma parte de nuestra galeria arte, para formar parte de nuestra pagina, ademas de tener mas funciones como usuario registrado.
+            </p>
+        </section>
+        <section id="formulario">
+            <h2>Creacion cuenta Usuario</h2>
+            <form action="{% url 'RC' %}" method="post" onsubmit="return validar()">
+                {% csrf_token %}
+                <div class="controles">
+
+                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre usuario" name="txtUser" id="txtUser">
+                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre" pattern="[a-zA-Z]+$" name="txtNombre" id="txtNombre">
+                    <input type="text" class="col-peque" required placeholder="Ingrese Apellido" pattern="[a-zA-Z]+$" name="txtApellido" id="txtApellido">
+                    <input type="email" class="col-peque" required placeholder="Ingrese email" name="txtEmail" id="txtEmail">
+                    <input type="password" minlength="5" maxlength="10" class="col-peque" required placeholder="Ingrese contraseña" name="txtPass1" id="txtPass1">
+                    <input type="password" minlength="5" maxlength="10" class="col-peque" required placeholder="Repita contraseña" name="txtPass2" id="txtPass2">
+
+
+                    <input type="submit" class="col-gra" value="Ingresar">
+                    <input type="reset" class="col-gra" value="Limpiar">
+                </div>
+            </form>
+        </section>
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+
+    {% block js %}
+    <script src="{% static 'https://cdn.jsdelivr.net/npm/sweetalert2@11' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock js %}
+</body>
+
+</html>

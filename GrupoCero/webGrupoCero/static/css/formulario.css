@@ -1,0 +1,42 @@
+#formulario{
+    background-color: rgba(7, 138, 105, 0.589);
+    padding: 15px;
+}
+
+#formulario h2{
+    background-color: rgba(7, 138, 105, 0.589);
+    font-family: cursive;
+    color: rgb(0, 0, 0);
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    max-width: 500px;
+}
+
+.controles{
+    background-color: aquamarine;
+    width: 90%;
+    margin: auto;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#formulario input{
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+.col-peque{
+    width: 40%;
+}
+
+.col-gra{
+    width: 90%;
+}
+
+.col-medi{
+    width: 100%;
+}

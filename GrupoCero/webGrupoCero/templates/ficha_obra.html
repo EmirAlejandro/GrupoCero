@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/info.css' %}">
+{% endblock css %}
+
+<body>
+
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>Las pinturas tienen una vida propia que se deriva del alma del pintor</h2>
+                <p>Adentrate en la maravilla del arte</p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido</h2>
+            <p> informacion de la obra</p>
+
+        </section>
+
+        <!--blog de arte-->
+        <section id="info">
+            <div class="contenedor">
+                <article>
+                    <a href="{{item.foto.url}}"  data-lightbox="obra1">
+                        <img src="{{item.foto.url}}" alt="">
+                    </a>
+                    <p>Nombre:</p>
+                    <h3>{{item.nombre}}</h3>
+                    <hr>
+                    <p>Fecha de creacion:</p>
+                    <h4>{{item.creacion}}</h4>
+                    <hr>
+                    <p>Descripcion:</p>
+                    <h4>{{item.descripcion}}</h4>
+                    <hr>
+                    <p>Categoria:</p>
+                    <h4>{{item.categoria.nombre}}</h4>
+                </article>
+            </div>
+        </section>
+        {% endblock contenidos %}
+
+
+
+    </main>
+    <footer>
+
+    </footer>
+</body>
+
+</html>

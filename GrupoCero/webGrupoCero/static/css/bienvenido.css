@@ -1,0 +1,21 @@
+#bienvenido{
+    font-family: cursive;
+    text-align: center;
+    margin-top: 45px;
+    margin-bottom: 30px;
+    
+}
+
+#bienvenido p{
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 50px;
+}
+
+#bienvenido h2{
+    color: rgb(0, 0, 0);
+}
+
+#bienvenido p{
+    color: rgb(0, 0, 0);
+}

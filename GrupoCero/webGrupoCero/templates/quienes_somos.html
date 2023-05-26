@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+<body>
+
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>“El objetivo del arte es representar no la apariencia externa de las cosas, sino su significado interior.”</h2>
+                <p>Forma parte de nosotros registrandote en nuestra pagina</p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Grupo Cero</h2>
+            <p>en esta parte de nuestra pagina encontraras mas informacion sobre nosotros y la forma de contactarnos.
+            </p>
+        </section>
+        <!--Quienes somos-->
+        <section id="quienes_somos">
+            <h2>¿Quienes Somos?</h2>
+            <p> Bueno nosotros nos conformamos como un grupo de artistas dedicados a la pintura, escultura, ofreberia,
+                tejido y entre otras expresiones artisticas, decidimos formar nuestra propiar cooperativa llamada "Grupo
+                Cero" como equipo buscamos resaltar el arte de todos aquellos artistas que buscan mostrar sus obras de
+                artes y ademas de mostrar estas obras a todos los usuarios amantes del arte, En nuestra pagina
+                encontraras obras de artes historicas, pintores, publicaciones de nuestros artistas, podras realizar
+                compras de estas ademas de un metodo de contacto con el artista.
+            </p>
+            <p>
+                Si te interesa saber mas de nosotros o quieres comunicarte con nostros, solo debes mandarnos a un correo el cual es el siguiente:
+                grupocero@gmail.com nosotros te estaremos respondiendo dentro de 24 horas.
+            </p>
+        </section>
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+
+</body>
+
+</html>

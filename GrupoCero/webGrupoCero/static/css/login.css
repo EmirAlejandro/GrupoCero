@@ -1,0 +1,38 @@
+#login{
+    background-color: rgba(5, 136, 81, 0.589);
+    padding: 15px;
+}
+
+#login h2{
+    background-color: rgba(5, 136, 81, 0.589);
+    font-family: cursive;
+    color: white;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    max-width: 500px;
+}
+
+.controles{
+    background-color: aquamarine;
+    width: 90%;
+    margin: auto;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#login input{
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+.col-peque{
+    width: 40%;
+}
+
+.col-gra{
+    width: 90%;
+}

@@ -1,0 +1,25 @@
+#info{
+    background-color: rgb(24, 80, 82);
+    margin-top: 45px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 20px;
+}
+#info .contenedor img{
+    width: 250px;
+    height: 250px;
+    border: solid 5px rgb(0, 0, 0);
+    border-radius: 10%;
+}
+#info .contenedor{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+#info .contenedor article{
+    margin: 30px;
+}
+
+#info .contenedor h3{
+    margin-top: 20px;
+}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+    
+    <!--Menu-->
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>Todo buen artista pinta lo que él o ella es.” Jackson Pollock (1912-1956)</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido al Formulario de Contacto </h2>
+            <p> te mantendremos informado con novedades y nuevas obras artes.
+            </p>
+        </section>
+        <section id="formulario">
+            <h2>Formulario de contacto</h2>
+            <form action="" method="post" onsubmit="return validar()">
+                <div class="controles">
+
+                    <input type="text" class="col-peque" required placeholder="Ingrese Rut(12345678-9)" name="" id="rut" />
+                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre completo" pattern="[a-zA-Z]+$" name="" id="nombre">
+                    <input type="email" class="col-peque" required placeholder="Ingrese email" name="" id="">
+                    <input type="text" class="col-peque" required placeholder="Ingrese nombre de artista" pattern="[a-zA-Z]+$" name="" id="">
+                    <input type="email" class="col-peque" required placeholder="Ingrese email de artista" name="" id="">
+                    <textarea class="col-gra" name="txtDesc" id="txtDesc" cols="30" rows="10"></textarea>
+
+
+                    <input type="submit" class="col-gra" value="Ingresar">
+                    <input type="reset" class="col-gra" value="Limpiar">
+                </div>
+            </form>
+        </section>
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+
+    {% block js %}
+    <script src="{% static 'https://cdn.jsdelivr.net/npm/sweetalert2@11' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock js %}
+
+</body>
+
+</html>

@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Cero</title>
+    <link rel="stylesheet" href="{% static 'css/fontello.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/lightbox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/galeria-categoria.css' %}">
+
+</head>
+
+
+
+<body>
+
+    <!--Menu-->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="{% static 'img/grupo cero.png' %}" style="width:40px;" padding="10px"
+                        alt="">Grupo cero</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'ind' %}">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'gal' %}">Galeria</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'for' %}">Formulario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'qui' %}">Quienes Somos</a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'ADMIN_OBR' %}">Administrador</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'LOGOUT' %}">Cerrar Sesion</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Bienvenido {{user.first_name}} {{user.last_name}}</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'LOGIN' %}">Ingresar</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'RC' %}">Registro</a>
+                                
+                            </li>
+                        {% endif %}
+                       
+                    </ul>
+                    
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>Las pinturas tienen una vida propia que se deriva del alma del pintor</h2>
+                <p>Adentrate en la maravilla del arte</p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido</h2>
+            <p>Admira tanto como puedas. La mayoria de la gente no admira lo suficiente
+                - Vicent van Gogh
+            </p>
+
+        </section>
+
+        <!--blog de arte-->
+        <section id="blog">
+            <h3>Famosas obras de artes</h3>
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- indicadores -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                    <li data-target="#demo" data-slide-to="3"></li>
+                </ul>
+
+                <!-- imagenes -->
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <a href="{% static 'img/obra1.PNG' %}" title="Noche Estrellada (1889) - Vicent Van Gogh" data-lightbox="obra1">
+                            <img src="{% static 'img/obra1.PNG' %}" alt="">
+                        </a>
+                        <div class="carousel-caption">
+                            <h3>Noche Estrellada</h3>
+                            <P>Vicent Van Gogh</P>
+                        </div>
+                    </div>
+                    
+                    {% for item in obras %}
+                    <div class="carousel-item">
+                        <a href="{{item.foto.url}}"  data-lightbox="obra1">
+                            <img src="{{item.foto.url}}" alt="">
+                        </a>
+                        <div class="carousel-caption">
+                            <h3>{{item.nombre}}</h3>
+                            <P>{{item.descripcion}}</P>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+
+                <!-- derecha e izquierda de los controles -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+
+            </div>
+        </section>
+
+
+        <section id="bienvenido">
+            
+            <form action="{% url 'BUSCAR_NOMBRE' %}" method="post">
+                {% csrf_token %} Busqueda por Nombre de Obra:
+                <input type="text" name="txtNombre" id="txtNombre">
+                <input type="submit" value="Buscar">
+            </form>
+
+            <form action="{% url 'BUSCAR_DESCRIPCION' %}" method="post">
+                {% csrf_token %} Busqueda por Descripcion de Obra:
+                <input type="text" name="txtNombre" id="txtNombre">
+                <input type="submit" value="Buscar">
+            </form>
+
+        </section>
+
+        <section id="blog">
+            <h3>Categorias</h3>
+            <div class="categoria">
+                {% for cat in categorias %}                
+                <article>
+                    <a href="{% url 'BUSCAR_CAT' cat.nombre %}">
+                        <img src="{{cat.img.url}}" alt=""/>
+                    
+                    <h4>{{cat.nombre}}</h4>
+                    </a>
+                </article>
+                {% endfor %}
+            </div>
+
+        </section>
+
+        <section id="galeria">
+            <h3>
+                Grandes Pintores de La Historia
+            </h3>
+
+            <div class="contenedor">
+                <article>
+                    <a href="{% static 'img/Leonardo-da-vinci.PNG' %}"
+                        title="Leonardo Da Vinci (1452–1519) - Leonardo di Ser Piero da Vinci fue uno de los grandes maestros del Renacimiento, famoso como pintor, escultor, arquitecto, ingeniero y científico. Su profundo amor por el conocimiento y la investigación fue la clave de su comportamiento tanto artístico como científico."
+                        data-lightbox="obra2">
+                        <img src="{% static 'img/Leonardo-da-vinci.PNG' %}" alt="">
+
+                    </a>
+                    <h4>Leonardo Da Vinci</h4>
+                </article>
+                <article>
+                    <a href="{% static 'img/Vicent-van-gogh.PNG' %}"
+                        title="Vicent Van Gogh (1853-1890) - Vicent Van Gogh fue un artista postimpresionista holandés cuyos cuadros se cuentan entre los más populares y reconocibles de la historia. Su pincelada dramática, su exuberante paleta y su maestría para captar momentos en el tiempo y la luz revolucionaron el arte."
+                        data-lightbox="obra2">
+                        <img src="{% static 'img/Vicent-van-gogh.PNG' %}" alt="">
+                    </a>
+                    <h4>Vicent Van Gogh</h4>
+                </article>
+                <article>
+                    <a href="{% static 'img/Claude-Monet.PNG' %}"
+                        title="Claude Monet (1840–1926) - Claude Monet fue un pintor francés representante del impresionismo, reconocido tanto por sus hallazgos pictóricos en el tratamiento de la luz, como por haber hecho el cuadro que le daría el nombre al movimiento."
+                        data-lightbox="obra2">
+                        <img src="{% static 'img/Claude-Monet.PNG' %}" alt="">
+                    </a>
+                    <h4>Claude Monet</h4>
+                </article>
+                <article>
+                    <a href="{% static 'img/Frida-Kahlo.PNG' %}"
+                        title="Frida Kahlo (1907–1954) - Frida Kahlo fue una pintora mexicana, reconocida por sus famosos autorretratos, calificados como parte del movimiento surrealista. La pintora, quien dijo no identificarse con el movimiento, creó un estilo propio tomando los aspectos de su vida, mezclándolos con los elementos de la naturaleza y la identidad mexicana."
+                        data-lightbox="obra2">
+                        <img src="{% static 'img/Frida-Kahlo.PNG' %}" alt="">
+                    </a>
+                    <h4>Frida Kahlo</h4>
+                </article>
+                <article>
+                    <a href="{% static 'img/Miguel-angel.PNG' %}"
+                        title="Miguel Angel (1475–1564) - fue un arquitecto, escultor, pintor y poeta italiano renacentista, considerado uno de los más grandes artistas de la historia tanto por sus esculturas como por sus pinturas y obra arquitectónica."
+                        data-lightbox="obra2">
+                        <img src="{% static 'img/Miguel-angel.PNG' %}" alt="">
+                    </a>
+                    <h4>Miguel Angel</h4>
+                </article>
+                <article>
+                    <a href="{% static 'img/Rembrandt.PNG' %}"
+                        title="Rembrandt (1606–1669) - fue un pintor y grabador holandés del periodo barroco del siglo XVII que innovó por completo el arte de su época. Fusionó los estilos de los mejores artistas y les dio un nuevo brillo. En sus obras puede verse influencia de grandes artistas como Caravaggio, Rubbens y Tiziano."
+                        data-lightbox="obra2">
+                        <img src="{% static 'img/Rembrandt.PNG' %}" alt="">
+                    </a>
+                    <h4>Rembrandt Harmenszoon</h4>
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+    <footer>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'qui' %}">¿Quienes Somos?</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </footer>
+    <script src="{% static 'js/lightbox-plus-jquery.min.js' %}"></script>
+</body>
+
+</html>

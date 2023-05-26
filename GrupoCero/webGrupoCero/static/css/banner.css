@@ -1,0 +1,15 @@
+#banner img{
+    width: 100%;
+    height: 800px;
+}
+
+#banner .contenedor{
+    position: absolute;
+    top: 48%;
+    left: 10%;
+    color: rgb(25, 194, 206);
+}
+
+#banner .contenedor h2{
+    font-size: 30px;
+}

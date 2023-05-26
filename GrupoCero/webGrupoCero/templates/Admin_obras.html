@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>“La obra de arte es un grito de libertad.” Christo Javacheff (1935-2020).</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Administrador de Obras</h2>
+            <p>Bienvenido</p>
+        </section>
+        <section id="formulario">
+            <h2>Ingrese nuevas obras</h2>
+            <form action="{% url 'ADMIN_OBR' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="controles">
+
+                    
+                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre" name="txtNombre" id="txtNombre">
+                    <input type="text" class="col-peque" required placeholder="Ingrese Creacion" name="txtCreacion" id="txtCreacion">
+                    <textarea class="col-gra" name="txtDesc" id="txtDesc" cols="30" rows="10"></textarea>
+                    <input type="file" name="txtImg" id="txtImg" class="col-gra">
+                    <select name="cboCategoria" id="cbCategoria" class="col-gra">
+                        {% for item in categorias %}
+                        <option value="">{{item.nombre}}</option>
+                        {% endfor %}
+                        
+                    </select>
+                    <input type="submit" class="col-peque" value="Ingresar">
+                    <input type="reset" class="col-peque" value="Limpiar">
+                </div>
+            </form>
+        </section>
+        <section>
+            <div style="font-size: xx-large;color: crimson;text-align: center;">
+                {{mensaje}}
+            </div>
+        </section>
+
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+
+    {% block js %}
+    <script src="{% static 'https://cdn.jsdelivr.net/npm/sweetalert2@11' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock js %}
+</body>
+
+</html>

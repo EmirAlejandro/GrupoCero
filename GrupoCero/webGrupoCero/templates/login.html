@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+<body>
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>El arte no cambia nada, el arte te cambia a ti</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido</h2>
+            <p> La belleza artística no consiste en representar una cosa bella, sino en la bella representación de una
+                cosa.» Immanuel Kant
+            </p>
+        </section>
+        <section id="login">
+            <h2>Ingresa a tu Cuenta de Usuario</h2>
+            <form action="" method="post" onsubmit="return validar()">
+                <div class="controles">
+                    {% csrf_token %}
+
+                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre usuario" name="txtUser" id="txtUser">
+                    <input type="email" class="col-peque" required placeholder="Ingrese email" name="txtEmail" id="txtEmail">
+                    <input type="password" minlength="5" maxlength="10" class="col-peque" required placeholder="Ingrese contraseña" name="txtPass1" id="txtPass1">
+                    <input type="password" minlength="5" maxlength="10" class="col-peque" required placeholder="Repita contraseña" name="txtPass2" id="txtPass2">
+
+
+                    <input type="submit" class="col-gra" value="Ingresar">
+                    <input type="reset" class="col-gra" value="Limpiar">
+                </div>
+            </form>
+        </section>
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+
+    {% block js %}
+    <script src="{% static 'https://cdn.jsdelivr.net/npm/sweetalert2@11' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock js %}
+
+</body>
+
+</html>

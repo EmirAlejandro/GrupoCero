@@ -1,0 +1,43 @@
+#galeria{
+    background-color: rgb(24, 80, 82);
+    margin-top: 45px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+
+}
+
+#galeria .contenedor img{
+    width: 250px;
+    height: 250px;
+    border-radius: 10%;
+    border: solid 2px rgb(112, 92, 92);
+
+
+}
+
+#galeria .contenedor{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#galeria .contenedor article{
+    margin: 30px;
+}
+
+#galeria .contenedor h4{
+    margin-top: 10px;
+    padding: 20px;
+}
+
+#galeria h3{
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    margin-top: 90px;
+}
+
+#galeria .contenedor img:hover{
+    opacity: 0.5;
+    
+}

@@ -1,0 +1,24 @@
+#quienes_somos{
+    background-color: rgba(5, 136, 81, 0.589);
+    padding: 15px;
+}
+
+#quienes_somos h2{
+    background-color: rgba(5, 136, 81, 0.589);
+    font-family: cursive;
+    color: rgba(0, 0, 0, 0.589);
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    max-width: 500px;
+}
+
+#quienes_somos p{
+    color: white;
+    background-color: rgba(3, 87, 52, 0.589);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}

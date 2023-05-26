@@ -1,0 +1,27 @@
+@import url(blog.css);
+@import url(galeria.css);
+@import url(formulario.css);
+@import url(banner.css);
+@import url(bienvenido.css);
+@import url(https://fonts.googleapis.com/css?family=Martel);
+@import url(menu.css);
+@import url(login.css);
+@import url(quienes_somos.css);
+@import url(info.css);
+
+/*valore iniciales*/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Martel', serif;
+
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
