@@ -155,7 +155,7 @@
         </section>
 
 
-        <section id="bienvenido">
+        <section id="bienvenido" style="background-color: #f2f2f2;">
             
             <form action="{% url 'BUSCAR_NOMBRE' %}" method="post">
                 {% csrf_token %} Busqueda por Nombre de Obra:
@@ -174,18 +174,36 @@
         <section id="blog">
             <h3>Categorias</h3>
             <div class="categoria">
+                <style>
+                .categoria-item {
+                    display: inline-block;
+                    width: calc(33.33% - 2px); /* Reducir el ancho de los elementos para dejar menos espacio entre ellos */
+                    margin-right: 5px;
+                    margin-bottom: 5px;
+                    box-sizing: border-box;
+                }
+        
+                .categoria-imagen {
+                    max-width: 350px;
+                    max-height: 350px;
+                    width: auto;
+                    height: auto;
+                    object-fit: contain;
+                    border: 1px solid #ddd;
+                }
+                </style>
+        
                 {% for cat in categorias %}                
-                <article>
+                <article class="categoria-item">
                     <a href="{% url 'BUSCAR_CAT' cat.nombre %}">
-                        <img src="{{cat.img.url}}" alt=""/>
-                    
-                    <h4>{{cat.nombre}}</h4>
+                        <img class="categoria-imagen" src="{{cat.foto.url}}" alt=""/>
                     </a>
+                    <h4>{{cat.nombre}}</h4>
                 </article>
                 {% endfor %}
             </div>
-
         </section>
+        
 
         <section id="galeria">
             <h3>
