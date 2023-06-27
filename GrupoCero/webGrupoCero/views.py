@@ -48,7 +48,7 @@ def admin_obra(request):
             descripcion=desc,
             foto=img,
             categoria=obj_cat,
-            comentario='--', 
+            comentario='S/C', 
             usuario=usu
         )
         obr.save()

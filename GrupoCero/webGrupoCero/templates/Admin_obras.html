@@ -2,7 +2,6 @@
 {% load static %}
 
 <body>
-
     <!--seccion cuerpo de la pagina-->
     <main>
         {% block contenidos %}
@@ -25,17 +24,14 @@
             <form action="{% url 'ADMIN_OBR' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="controles">
-
-                    
                     <input type="text" class="col-peque" required placeholder="Ingrese Nombre" name="txtNombre" id="txtNombre">
                     <input type="text" class="col-peque" required placeholder="Ingrese Creacion" name="txtCreacion" id="txtCreacion">
                     <textarea class="col-gra" name="txtDesc" id="txtDesc" cols="30" rows="10"></textarea>
                     <input type="file" name="txtImg" id="txtImg" class="col-gra">
                     <select name="cboCategoria" id="cbCategoria" class="col-gra">
                         {% for item in categorias %}
-                        <option value="">{{item.nombre}}</option>
+                        <option value="{{ item.nombre }}">{{ item.nombre }}</option>
                         {% endfor %}
-                        
                     </select>
                     <input type="submit" class="col-peque" value="Ingresar">
                     <input type="reset" class="col-peque" value="Limpiar">
@@ -47,7 +43,6 @@
                 {{mensaje}}
             </div>
         </section>
-
         {% endblock contenidos %}
     </main>
 
