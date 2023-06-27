@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, login as login_aut, authenticate
@@ -32,7 +32,10 @@ def formulario(request):
 
 def admin_obra(request):
     cate = Categoria.objects.all()
-    data = {'categorias': cate}
+    usuario= request.user.username
+    usu=User.objects.get(username=usuario)
+    obras= Obra.objects.filter(usuario=usu)
+    data = {'categorias': cate, 'obras':obras}
     if request.POST:
         nom = request.POST.get("txtNombre")
         cre = request.POST.get("txtCreacion")
@@ -48,7 +51,8 @@ def admin_obra(request):
             descripcion=desc,
             foto=img,
             categoria=obj_cat,
-            comentario='S/C', 
+            publicar=False,
+            comentario='--', 
             usuario=usu
         )
         obr.save()
@@ -136,3 +140,46 @@ def cerrar(request):
     obra=Obra.objects.filter(publicar=True).order_by("-idObra")[:3]
     data={'categorias':cate,'obras':obra}
     return render(request,"index.html", data)
+
+def eliminar(request,id):
+    cate = Categoria.objects.all()
+    usuario= request.user.username
+    usu=User.objects.get(username=usuario)
+    obras= Obra.objects.filter(usuario=usu)
+    data = {'categorias': cate, 'obras':obras,'mensaje':''}
+    obra = Obra.objects.get(idObra=id)
+    try: 
+        obra.delete()
+        data["mensaje"]='Elimino'
+    except:
+        data["mensaje"]='No elimino'
+    return render(request, "admin_obras.html", data)
+
+def modificar(request,id):
+    obra= Obra.objects.get(idObra=id)
+    cate = Categoria.objects.all()
+    data={'obra':obra, 'categorias': cate}
+    return render(request,"modificar.html",data)
+
+def modificar_obra(request):
+    if request.POST:
+        nom = request.POST.get("txtNombre")
+        cre = request.POST.get("txtCreacion")
+        desc = request.POST.get("txtDesc")
+        img = request.FILES.get("txtImg")
+        cat = request.POST.get("cboCategoria")
+        id = request.POST.get("txtId")
+        obj_cat = Categoria.objects.get(nombre=cat)
+        nom_usu = request.user.username
+        usu = User.objects.get(username=nom_usu)
+        obr = Obra.objects.get(idObra=id)
+        obr.nombre=nom
+        obr.creacion=cre
+        obr.descripcion=desc
+        obr.comentario='Revisar'
+        obr.categoria=obj_cat
+        obr.usuario=usu
+        if img is not None:
+            obr.foto=img 
+        obr.save()
+    return redirect('/admin_obra/')

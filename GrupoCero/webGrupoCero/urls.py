@@ -15,7 +15,8 @@ urlpatterns = [
     path('buscar_descripcion/',buscar_descripcion,name='BUSCAR_DESCRIPCION'),
     path('buscar_categoria/<id>/',buscar_categoria,name='BUSCAR_CAT'),
     path('registrar_colaborador/',registro_colaborador,name='RC'),
-    path('logout/',cerrar,name='LOGOUT')
-    
-    
+    path('logout/',cerrar,name='LOGOUT'),
+    path('eliminar/<id>/',eliminar,name='ELI'),
+    path('modificar/<id>/',modificar,name='MOD'),
+    path('modificar_obra/',modificar_obra,name='MO'),
 ]

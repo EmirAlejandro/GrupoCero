@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% block css %}
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock css %}
 <body>
     <!--seccion cuerpo de la pagina-->
     <main>
@@ -17,7 +19,11 @@
         <!--bienvenida-->
         <section id="bienvenido">
             <h2>Administrador de Obras</h2>
-            <p>Bienvenido</p>
+            <hr>
+            <h4>Usuario: {{user.username}} </h4>
+            <h4>Nombre: {{user.first_name}} {{user.last_name}} </h4>
+            <hr>
+            <h3>Bienvenido</h3>
         </section>
         <section id="formulario">
             <h2>Ingrese nuevas obras</h2>
@@ -43,6 +49,80 @@
                 {{mensaje}}
             </div>
         </section>
+        <section>
+            <table border="1">
+                <tr>
+                    <td>N</td>
+                    <td>Nombre</td>
+                    <td>Categoria</td>
+                    <td>Imagen</td>
+                    <td>publicado</td>
+                    <td>Comentario</td>
+                    <td>Operaciones</td>
+                </tr>
+                {% for item in obras %}
+                <tr>
+                    <td>{{item.idObra}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.categoria.nombre}}</td>
+                    <td>
+                        <img src="{{item.foto.url}}">
+                    </td>
+                    <td>
+                        {% if item.publicar == True %}
+                         Publicado
+                        {% else %}
+                         No publicado
+                        {% endif %}
+                    </td>
+                    <td>{{item.comentario}}</td>
+                    <td>
+                        <button onclick="eliminar({{item.idObra}})">Eliminar</button>
+                        <button onclick="modificar({{item.idObra}})">Modificar</button>
+                        <button>Subir foto galeria</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+        <script>
+        function modificar(id){
+            location.href= "/modificar/" + id + "/";
+        }
+            function eliminar(id){
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                      confirmButton: 'btn btn-success',
+                      cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                  })
+                  
+                  swalWithBootstrapButtons.fire({
+                    title: 'Eliminar',
+                    text: "estas seguro que quieres eliminar?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Si',
+                    cancelButtonText: 'No',
+                    reverseButtons: true
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href= "/eliminar/" + id + "/";
+                    } else if (
+                      /* Read more about handling dismissals below */
+                      result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                      swalWithBootstrapButtons.fire(
+                        'Cancelado',
+                        'Tu obra sigue en la pagina',
+                        'error'
+                      )
+                    }
+                  })
+                
+            }
+        </script>
         {% endblock contenidos %}
     </main>
 

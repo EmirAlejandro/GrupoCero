@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% endblock css %}
+<body>
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>“La obra de arte es un grito de libertad.” Christo Javacheff (1935-2020).</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Administrador de Obras</h2>
+            <hr>
+            <h4>Usuario: {{user.username}} </h4>
+            <h4>Nombre: {{user.first_name}} {{user.last_name}} </h4>
+            <hr>
+            <h3>Bienvenido</h3>
+        </section>
+        <section id="formulario">
+            <h2>Modificar obras</h2>
+            
+            <input type="hidden" name="txtId" value="{{obra.idObra}}">
+            
+            <form action="{% url 'MO' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="controles">
+                    <input type="text" class="col-peque" name="txtNombre" id="txtNombre" value="{{obra.nombre}}">
+                    <input type="text" class="col-peque" name="txtCreacion" id="txtCreacion" value="{{obra.creacion}}">
+                    
+                    <textarea class="col-gra" name="txtDesc" id="txtDesc" cols="30" rows="10">{{obra.descripcion}}"</textarea>
+                    
+                    <input type="file" name="txtImg" id="txtImg" class="col-gra">
+                   
+                    <a href="{{obra.foto.url}}">ver imagen</a>
+                   
+                    <select name="cboCategoria" id="cbCategoria" class="col-gra">
+                        {% for item in categorias %}
+                            {% if item.nombre == item.categoria.nombre %}
+                                <option select value="{{ item.nombre }}">{{ item.nombre }}</option>
+                            {% else %}
+                                <option value="{{ item.nombre }}">{{ item.nombre }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="submit" class="col-peque" value="Ingresar">
+                    <input type="reset" class="col-peque" value="Limpiar">
+                </div>
+            </form>
+        </section>
+        <section>
+            <div style="font-size: xx-large;color: crimson;text-align: center;">
+                {{mensaje}}
+            </div>
+        </section>
+
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+
+    {% block js %}
+    <script src="{% static 'https://cdn.jsdelivr.net/npm/sweetalert2@11' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% endblock js %}
+</body>
+
+</html>
