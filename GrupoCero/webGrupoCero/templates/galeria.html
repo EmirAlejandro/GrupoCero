@@ -5,9 +5,7 @@
 <link rel="stylesheet" href="{% static 'css/galeria-blog.css' %}">
 {% endblock css %}
 
-
 <body>
-
 
     <!--seccion cuerpo de la pagina-->
     <main>
@@ -42,7 +40,7 @@
                         <h3>Nenufares</h3>
                         <p>Autor: Claude Monet</p>
                         <p>Tecnica Usada: Pintura Realizada a Mano.</p>
-                        <p>Precio: 70 Millones de dolares.</p>
+                        <p>Precio: 70 Millones de dólares.</p>
                         <p>Historia: La serie "Los nenúfares" es una colección de alrededor de 250 pinturas al óleo
                             realizadas por el pintor impresionista Claude Monet al final de su vida. Las obras, que
                             se exhiben en el Museo de la Orangerie de las Tullerías en París, representan un lago
@@ -63,7 +61,7 @@
                         <h3>Las Señoritas de Avignon</h3>
                         <p>Autor: Pablo Picasso</p>
                         <p>Tenica Usada: Pintura Realizada a Mano </p>
-                        <p>Precio: 106.5 millones de dolares. </p>
+                        <p>Precio: 106.5 millones de dólares. </p>
                         <p>Historia: "Las señoritas de Avignon" es una obra de arte realizada por Pablo Picasso, que
                             muestra a cinco prostitutas de la calle de Avinyó en Barcelona. La obra es considerada
                             como proto-cubista, ya que el movimiento aún no existía en ese momento. Picasso se
@@ -86,7 +84,7 @@
                         <h3>El Nacimiento de Venus</h3>
                         <p>Autor: Sandro Botticelli</p>
                         <p>Tecnica Usada: Pintura Realizada a Mano</p>
-                        <p>Precio: 92 Millones de dolares</p>
+                        <p>Precio: 92 Millones de dólares</p>
                         <p>Historia: Botticelli fue uno de los primeros artistas occidentales en pintar temas no
                             religiosos y desnudos femeninos de personajes no bíblicos, lo que se relaciona con la
                             idea del Renacimiento de considerar la pintura como fuente de placer para los sentidos y
@@ -98,7 +96,6 @@
                     </div>
                 </div>
         </section>
-
 
         <section id="galeria">
             <h3>
@@ -114,19 +111,37 @@
                     <h4><a href="{% url 'FICHA_OBRA' item.idObra %}" class="btn btn-primary">Ver detalle obra</a></h4>
                 </article>
                 {% endfor %}
-                
+
             </div>
         </section>
-        
 
         
         {% endblock contenidos %}
     </main>
-
     <footer>
-
+        
     </footer>
-    
+    {% block js %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $.ajax({
+            url: 'https://mindicador.cl/api',
+            method: 'GET',
+            success: function(response) {
+                var valorDolar = response.dolar.valor.toFixed(2);
+                
+                
+                $('footer').append('<p>Valor del dólar: $' + valorDolar + '</p>');
+            },
+            error: function() {
+                console.log('Error al obtener los datos del dólar');
+            }
+            });
+        });
+        </script>
+    {% endblock js %}
+
 </body>
 
 </html>
