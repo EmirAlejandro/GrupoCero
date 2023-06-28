@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import *
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import logout, login as login_aut, authenticate
+from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 def index(request):
     cate=Categoria.objects.all()
@@ -13,6 +14,8 @@ def index(request):
 def login(request):
     return render(request,"login.html")
 
+
+@permission_required('auth.add_user',login_url='/login/')
 def Registro(request):
     return render(request,"Registro.html")
 
@@ -29,7 +32,8 @@ def quienes(request):
 def formulario(request):
     return render(request,"formulario.html")
 
-
+@login_required(login_url='/login/')
+@permission_required(['webGrupoCero.add_obra','webGrupoCero.change_obra','webGrupoCero.delete_obra','webGrupoCero.view_obra'],login_url='/login/')
 def admin_obra(request):
     cate = Categoria.objects.all()
     usuario= request.user.username
@@ -58,6 +62,7 @@ def admin_obra(request):
         obr.save()
         data['mensaje'] = "Grabo"
     return render(request, "admin_obras.html", data)
+
 
 def ficha_obra(request,id):
     obr = Obra.objects.get(idObra=id)
@@ -106,12 +111,13 @@ def registro_colaborador(request):
         usuario.username=usu
         usuario.email= email
         usuario.set_password(p)
-        
+        grupo = Group.objects.get(name='colaborador')
         try:
             usuario.save() 
-            data["mensaje"]='Grabo usuario'
+            usu.groups.add(grupo)
+            data['mensaje']='Grabo usuario'
         except:
-            data["mensaje"]='error al grabar' 
+            data['mensaje']='error al grabar' 
     return render(request,"Registro.html",data)
 
 def login_vista(request):
@@ -131,7 +137,7 @@ def login_vista(request):
             
             return render(request, "index.html", data)
         else:
-            data["mensaje"] = 'usuario/contraseña inválida'
+            data['mensaje'] = 'usuario/contraseña inválida'
             data['email'] = email
     return render(request, "login.html", data)
 
@@ -163,6 +169,7 @@ def modificar(request,id):
     data={'obra':obra, 'categorias': cate}
     return render(request,"modificar.html",data)
 
+login_required(login_url='/login/')
 def modificar_obra(request):
     if request.POST:
         nom = request.POST.get("txtNombre")
@@ -186,7 +193,7 @@ def modificar_obra(request):
         obr.save()
     return redirect('/admin_obra/')
 
-
+login_required(login_url='/login/')
 def subir_galeria(request):
     if request.POST:
         idObra = request.POST.get("txtId")
