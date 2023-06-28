@@ -28,10 +28,10 @@
         <section id="formulario">
             <h2>Modificar obras</h2>
             
-            <input type="hidden" name="txtId" value="{{obra.idObra}}">
             
             <form action="{% url 'MO' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" name="txtId" value="{{obra.idObra}}">
                 <div class="controles">
                     <input type="text" class="col-peque" name="txtNombre" id="txtNombre" value="{{obra.nombre}}">
                     <input type="text" class="col-peque" name="txtCreacion" id="txtCreacion" value="{{obra.creacion}}">

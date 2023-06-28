@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
 class Categoria(models.Model):
     nombre=models.CharField(primary_key=True,max_length=45)
     foto = models.ImageField(upload_to='foto',null=True)
@@ -23,3 +24,12 @@ class Obra(models.Model):
     def __str__(self):
         return self.nombre
     
+    
+class Galeria(models.Model):
+    idFoto= models.AutoField(primary_key=True)
+    foto= models.ImageField(upload_to='foto',null=True)
+    obra= models.ForeignKey(Obra,on_delete=models.CASCADE)
+
+    
+    def __str__(self) -> str :
+        return str(self.idFoto)+ " "+str(self.obra.nombre)

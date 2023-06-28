@@ -19,4 +19,5 @@ urlpatterns = [
     path('eliminar/<id>/',eliminar,name='ELI'),
     path('modificar/<id>/',modificar,name='MOD'),
     path('modificar_obra/',modificar_obra,name='MO'),
+    path('subir/',subir_galeria,name='SG'),
 ]

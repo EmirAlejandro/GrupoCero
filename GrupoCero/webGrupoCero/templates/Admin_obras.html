@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block css %}
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 {% endblock css %}
+
 <body>
     <!--seccion cuerpo de la pagina-->
     <main>
@@ -30,8 +31,10 @@
             <form action="{% url 'ADMIN_OBR' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="controles">
-                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre" name="txtNombre" id="txtNombre">
-                    <input type="text" class="col-peque" required placeholder="Ingrese Creacion" name="txtCreacion" id="txtCreacion">
+                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre" name="txtNombre"
+                        id="txtNombre">
+                    <input type="text" class="col-peque" required placeholder="Ingrese Creacion" name="txtCreacion"
+                        id="txtCreacion">
                     <textarea class="col-gra" name="txtDesc" id="txtDesc" cols="30" rows="10"></textarea>
                     <input type="file" name="txtImg" id="txtImg" class="col-gra">
                     <select name="cboCategoria" id="cbCategoria" class="col-gra">
@@ -44,13 +47,43 @@
                 </div>
             </form>
         </section>
+        <!-- modal -->
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Subir Foto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{% url 'SG' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="modal-body">  
+                            <input type="hidden" id="txtId" name="txtId">
+                            Imagen:<input type="file" name="txtImg" id="txtImg" class="col-gra">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- modal -->
         <section>
             <div style="font-size: xx-large;color: crimson;text-align: center;">
                 {{mensaje}}
             </div>
         </section>
         <section>
-            <table border="1">
+            <table class="table table-bordered table-dark">
                 <tr>
                     <td>N</td>
                     <td>Nombre</td>
@@ -70,35 +103,41 @@
                     </td>
                     <td>
                         {% if item.publicar == True %}
-                         Publicado
+                        Publicado
                         {% else %}
-                         No publicado
+                        No publicado
                         {% endif %}
                     </td>
                     <td>{{item.comentario}}</td>
                     <td>
-                        <button onclick="eliminar({{item.idObra}})">Eliminar</button>
-                        <button onclick="modificar({{item.idObra}})">Modificar</button>
-                        <button>Subir foto galeria</button>
+                        <button onclick="eliminar({{item.idObra}})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Eliminar</button>
+                        <button onclick="modificar({{item.idObra}})" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Modificar</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="subirimagen({{item.idObra}})">
+                            Subir foto galeria
+                        </button>
                     </td>
                 </tr>
                 {% endfor %}
             </table>
         </section>
         <script>
-        function modificar(id){
-            location.href= "/modificar/" + id + "/";
-        }
-            function eliminar(id){
+            function subirimagen(id) {
+                document.getElementById("txtId").value=id
+            }
+
+            function modificar(id) {
+                location.href = "/modificar/" + id + "/";
+            }
+            function eliminar(id) {
                 const swalWithBootstrapButtons = Swal.mixin({
                     customClass: {
-                      confirmButton: 'btn btn-success',
-                      cancelButton: 'btn btn-danger'
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
                     },
                     buttonsStyling: false
-                  })
-                  
-                  swalWithBootstrapButtons.fire({
+                })
+
+                swalWithBootstrapButtons.fire({
                     title: 'Eliminar',
                     text: "estas seguro que quieres eliminar?",
                     icon: 'warning',
@@ -106,21 +145,21 @@
                     confirmButtonText: 'Si',
                     cancelButtonText: 'No',
                     reverseButtons: true
-                  }).then((result) => {
+                }).then((result) => {
                     if (result.isConfirmed) {
-                        location.href= "/eliminar/" + id + "/";
+                        location.href = "/eliminar/" + id + "/";
                     } else if (
-                      /* Read more about handling dismissals below */
-                      result.dismiss === Swal.DismissReason.cancel
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
                     ) {
-                      swalWithBootstrapButtons.fire(
-                        'Cancelado',
-                        'Tu obra sigue en la pagina',
-                        'error'
-                      )
+                        swalWithBootstrapButtons.fire(
+                            'Cancelado',
+                            'Tu obra sigue en la pagina',
+                            'error'
+                        )
                     }
-                  })
-                
+                })
+
             }
         </script>
         {% endblock contenidos %}

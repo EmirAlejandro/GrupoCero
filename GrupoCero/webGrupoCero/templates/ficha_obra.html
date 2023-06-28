@@ -46,6 +46,17 @@
                     <h4>{{item.categoria.nombre}}</h4>
                 </article>
             </div>
+            <center>
+            <table>
+                <tr>
+                    {% for item in galeria %}
+                    <td>
+                        <img src="{{item.foto.url}}" height="250px" width="250px">
+                    </td>
+                    {% endfor %}
+                </tr>
+            </table>
+            </center>
         </section>
         {% endblock contenidos %}
 

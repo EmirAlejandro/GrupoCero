@@ -61,7 +61,9 @@ def admin_obra(request):
 
 def ficha_obra(request,id):
     obr = Obra.objects.get(idObra=id)
-    data={"item":obr}
+    galeria = Galeria.objects.filter(obra=obr)
+    
+    data={"item":obr,'galeria':galeria}
     return render(request,"ficha_obra.html",data)
 
 def buscar_nombre(request):
@@ -182,4 +184,17 @@ def modificar_obra(request):
         if img is not None:
             obr.foto=img 
         obr.save()
+    return redirect('/admin_obra/')
+
+
+def subir_galeria(request):
+    if request.POST:
+        idObra = request.POST.get("txtId")
+        obra = Obra.objects.get(idObra=idObra)
+        foto = request.FILES.get("txtImg")
+        gale = Galeria(
+            foto=foto,
+            obra=obra
+        )
+        gale.save()
     return redirect('/admin_obra/')
