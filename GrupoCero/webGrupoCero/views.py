@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import logout, login as login_aut, authenticate
 from django.contrib.auth.decorators import login_required, permission_required
+from .Carrito import *
 # Create your views here.
 def index(request):
     cate=Categoria.objects.all()
@@ -45,6 +46,7 @@ def admin_obra(request):
         cre = request.POST.get("txtCreacion")
         desc = request.POST.get("txtDesc")
         img = request.FILES.get("txtImg")
+        precio = request.POST.get("txtPrecio")
         cat = request.POST.get("cboCategoria")
         obj_cat = Categoria.objects.get(nombre=cat)
         nom_usu = request.user.username
@@ -57,7 +59,8 @@ def admin_obra(request):
             categoria=obj_cat,
             publicar=False,
             comentario='--', 
-            usuario=usu
+            usuario=usu,
+            precio=precio
         )
         obr.save()
         data['mensaje'] = "Grabo"
@@ -205,3 +208,18 @@ def subir_galeria(request):
         )
         gale.save()
     return redirect('/admin_obra/')
+
+
+# controladores carrito #
+
+
+def agregar_articulo(request,articulo_id):
+    carrito = Carrito(request)
+    obra = Obra.objects.get(idObra=articulo_id)
+    carrito.agregar(obra)
+    datos = request.session["carrito"]
+    print(datos)
+    return redirect('/galeria/')
+
+def carrito(request):
+    return render(request, 'carrito.html')

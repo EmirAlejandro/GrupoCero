@@ -22,5 +22,7 @@ urlpatterns = [
     path('modificar/<id>/',login_required(permission_required(['webGrupoCero.change_obra'], login_url='/login/')(modificar)),name='MOD'),
     path('modificar_obra/',login_required(permission_required(['webGrupoCero.change_obra'], login_url='/login/')(modificar_obra)),name='MO'),
     path('subir/',login_required(permission_required(['webGrupoCero.add_galeria'], login_url='/login/')(subir_galeria)),name='SG'),
+    path('agregar/<articulo_id>/', agregar_articulo, name='AA'),
+    path('carrito/',carrito, name='carrito'),
 ]
 

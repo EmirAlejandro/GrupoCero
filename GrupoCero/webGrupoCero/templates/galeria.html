@@ -107,15 +107,19 @@
             <div class="contenedor">
                 {% for item in obras %}
                 <article>
-                    <a href="{% url 'FICHA_OBRA' item.idObra %}">
+                    <a href="{{item.foto.url}}" data-lightbox="obra">
                         <img src="{{item.foto.url}}" alt="">
                     </a>
                     <h4>{{item.nombre}}</h4>
+                    <h4> <a href="{% url 'FICHA_OBRA' item.idObra %}">
+                        Ver detalle obra
+                    </a></h4>
                 </article>
                 {% endfor %}
                 
             </div>
         </section>
+        
         {% endblock contenidos %}
     </main>
 

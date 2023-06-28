@@ -31,10 +31,9 @@
             <form action="{% url 'ADMIN_OBR' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="controles">
-                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre" name="txtNombre"
-                        id="txtNombre">
-                    <input type="text" class="col-peque" required placeholder="Ingrese Creacion" name="txtCreacion"
-                        id="txtCreacion">
+                    <input type="text" class="col-peque" required placeholder="Ingrese Nombre" name="txtNombre" id="txtNombre">
+                    <input type="text" class="col-peque" required placeholder="Ingrese Creacion" name="txtCreacion" id="txtCreacion">
+                    <input type="number" class="col-peque" required placeholder="Ingrese Precio" name="txtPrecio" id="txtPrecio">
                     <textarea class="col-gra" name="txtDesc" id="txtDesc" cols="30" rows="10"></textarea>
                     <input type="file" name="txtImg" id="txtImg" class="col-gra">
                     <select name="cboCategoria" id="cbCategoria" class="col-gra">
@@ -42,6 +41,8 @@
                         <option value="{{ item.nombre }}">{{ item.nombre }}</option>
                         {% endfor %}
                     </select>
+
+
                     <input type="submit" class="col-peque" value="Ingresar">
                     <input type="reset" class="col-peque" value="Limpiar">
                 </div>
@@ -99,7 +100,7 @@
                     <td>{{item.nombre}}</td>
                     <td>{{item.categoria.nombre}}</td>
                     <td>
-                        <img src="{{item.foto.url}}">
+                        <img src="{{ item.foto.url }}" width="400px" height="400px">
                     </td>
                     <td>
                         {% if item.publicar == True %}

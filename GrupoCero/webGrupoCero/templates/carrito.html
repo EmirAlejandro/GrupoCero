@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/galeria-blog.css' %}">
+<style>
+    /* Estilos personalizados para el carrito */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+</style>
+{% endblock css %}
+
+
+<body>
+
+
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>El arte no cambia nada, el arte te cambia a ti</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido</h2>
+            <p> a tu carrito de compras y disfruta de nuestra bellas obras de arte
+            </p>
+        </section>
+        
+        <div>
+            <table>
+                <tr border="1">
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Acumulado</th>
+                </tr>
+                {% if request.session.carrito.items %}
+                    {% for key, value in request.session.carrito.items %}
+                    <tr>
+                        <td> {{value.nombre}} </td>
+                        <td> {{value.cantidad}} </td>
+                        <td> {{value.acumulado}} </td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+               
+            </table>
+        </div>
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+
+    </footer>
+    
+</body>
+</html>

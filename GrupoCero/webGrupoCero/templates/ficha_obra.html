@@ -45,6 +45,13 @@
                     <p>Categoria:</p>
                     <h4>{{item.categoria.nombre}}</h4>
                     <hr>
+                    <p>Precio:</p>
+
+                    <h4>${{item.precio}}</h4>
+
+                    <a href="{% url 'AA' item.idObra %}">
+                        Agregar al carrito
+                    </a>
                 </article>
             </div>
             <center>

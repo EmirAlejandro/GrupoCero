@@ -20,6 +20,7 @@ class Obra(models.Model):
     comentario=models.TextField(default='--')
     usuario=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     categoria=models.ForeignKey(Categoria,on_delete=models.CASCADE)
+    precio = models.IntegerField(default=100)
     
     def __str__(self):
         return self.nombre
