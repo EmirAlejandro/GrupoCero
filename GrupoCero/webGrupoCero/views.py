@@ -219,7 +219,18 @@ def agregar_articulo(request,articulo_id):
     carrito.agregar(obra)
     datos = request.session["carrito"]
     print(datos)
-    return redirect('/galeria/')
+    return redirect('/carrito/')
 
 def carrito(request):
     return render(request, 'carrito.html')
+
+def quitar(request,articulo_id):
+    carrito = Carrito(request)
+    obra = Obra.objects.get(idObra=articulo_id)
+    carrito.resta(obra)
+    return redirect('/carrito/')
+
+def vaciar(request):
+    carrito = Carrito(request)
+    carrito.vaciar()
+    return redirect('/carrito/')

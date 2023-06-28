@@ -24,5 +24,7 @@ urlpatterns = [
     path('subir/',login_required(permission_required(['webGrupoCero.add_galeria'], login_url='/login/')(subir_galeria)),name='SG'),
     path('agregar/<articulo_id>/', agregar_articulo, name='AA'),
     path('carrito/',carrito, name='carrito'),
+    path('quitar/<articulo_id>/',quitar,name='RESTA'),
+    path('vaciar/',vaciar,name='VACIAR'),
 ]
 

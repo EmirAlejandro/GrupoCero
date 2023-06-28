@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/galeria-blog.css' %}">
 <style>
     /* Estilos personalizados para el carrito */
+    .carrito-container {
+        display: flex;
+        justify-content: center;
+    }
+    
     table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 20px;
     }
     
     th, td {
@@ -23,13 +30,27 @@
     tr:nth-child(even) {
         background-color: #f9f9f9;
     }
+    
+    .boton-agregar,
+    .boton-quitar,
+    .boton-vaciar {
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 3px;
+    }
+    
+    .boton-agregar:hover,
+    .boton-quitar:hover,
+    .boton-vaciar:hover {
+        background-color: #0056b3;
+    }
 </style>
 {% endblock css %}
 
-
 <body>
-
-
     <!--seccion cuerpo de la pagina-->
     <main>
         {% block contenidos %}
@@ -49,24 +70,47 @@
             </p>
         </section>
         
-        <div>
+        <div class="carrito-container">
             <table>
                 <tr border="1">
                     <th>Nombre</th>
                     <th>Cantidad</th>
-                    <th>Acumulado</th>
+                    <th>Precio</th>
+                    
                 </tr>
                 {% if request.session.carrito.items %}
                     {% for key, value in request.session.carrito.items %}
                     <tr>
                         <td> {{value.nombre}} </td>
                         <td> {{value.cantidad}} </td>
-                        <td> {{value.acumulado}} </td>
+                        <td>${{ value.acumulado|intcomma }} clp</td>
+                        <td>
+                            <a href="{% url 'AA' value.producto_id %}" class="boton-agregar">Agregar</a>
+                            <a href="{% url 'RESTA' value.producto_id %}" class="boton-quitar">Quitar</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 {% endif %}
-               
+               <tr>
+                    <td colspan="2"> 
+                        TOTAL
+                    </td>
+                    <td>
+                        ${{ total_carrito|intcomma }} clp
+                    </td>
+               </tr>
+               <tr>
+                <td colspan="2"> 
+                    Cantidad
+                </td>
+                <td>
+                    {{cantidad}}
+                </td>
+           </tr>
             </table>
+        </div>
+        <div class="carrito-container">
+            <a href="{% url 'VACIAR' %}" class="boton-vaciar">Vaciar carrito</a>
         </div>
         {% endblock contenidos %}
     </main>
@@ -74,6 +118,5 @@
     <footer>
 
     </footer>
-    
 </body>
 </html>
