@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/info.css' %}">
 {% endblock css %}
@@ -47,11 +48,9 @@
                     <hr>
                     <p>Precio:</p>
 
-                    <h4>${{item.precio}}</h4>
+                    <h4>${{item.precio|intcomma}} clp</h4>
 
-                    <a href="{% url 'AA' item.idObra %}">
-                        Agregar al carrito
-                    </a>
+                    <a href="{% url 'AA' item.idObra %}" class="btn btn-primary">Agregar al carrito</a>
                     <hr>
                 </article>
             </div>

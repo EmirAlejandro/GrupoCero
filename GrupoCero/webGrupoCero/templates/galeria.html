@@ -111,9 +111,7 @@
                         <img src="{{item.foto.url}}" alt="">
                     </a>
                     <h4>{{item.nombre}}</h4>
-                    <h4> <a href="{% url 'FICHA_OBRA' item.idObra %}">
-                        Ver detalle obra
-                    </a></h4>
+                    <h4><a href="{% url 'FICHA_OBRA' item.idObra %}" class="btn btn-primary">Ver detalle obra</a></h4>
                 </article>
                 {% endfor %}
                 
