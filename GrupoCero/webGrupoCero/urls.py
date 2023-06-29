@@ -26,5 +26,7 @@ urlpatterns = [
     path('carrito/',carrito, name='carrito'),
     path('quitar/<articulo_id>/',quitar,name='RESTA'),
     path('vaciar/',vaciar,name='VACIAR'),
+    path('comprar/', comprar, name='comprar'),
+    path('historial_compra/', historial_compra, name='historial_compra'),
 ]
 

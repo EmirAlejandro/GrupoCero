@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import logout, login as login_aut, authenticate
 from django.contrib.auth.decorators import login_required, permission_required
+from .proceso_contexto import *
 from .Carrito import *
 # Create your views here.
 def index(request):
@@ -234,3 +235,26 @@ def vaciar(request):
     carrito = Carrito(request)
     carrito.vaciar()
     return redirect('/carrito/')
+
+def comprar(request):
+    if request.method == 'POST':
+        carrito = Carrito(request)
+        usuario = request.user
+        total = 0
+        for producto in carrito.carrito.values():
+            total += producto['acumulado']
+        compra = Compra.objects.create(usuario=usuario, total=total)
+        for producto in carrito.carrito.values():
+            obra = Obra.objects.get(idObra=producto['producto_id'])
+            compra.obras.add(obra)
+        carrito.vaciar()
+        return redirect('historial_compra')  
+
+    return render(request, 'carrito.html')
+
+
+def historial_compra(request):
+    usuario = request.user
+    historial_compras = Compra.objects.filter(usuario=usuario)
+
+    return render(request, 'historial_compra.html', {'historial': historial_compras})

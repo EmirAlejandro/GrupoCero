@@ -51,4 +51,17 @@ class Carrito:
         self.session["carrito"]={}
         self.session.modified = True        
     
-        
+    def obtener_historial(self):
+        historial = self.session.get("historial_compras", [])
+        return historial
+
+    def guardar_compra(self, usuario, total):
+        compra = {
+            "usuario": usuario,
+            "productos": list(self.carrito.values()),
+            "total": total
+        }
+        historial = self.obtener_historial()
+        historial.append(compra)
+        self.session["historial_compras"] = historial
+        self.session.modified = True

@@ -31,20 +31,24 @@
         background-color: #f9f9f9;
     }
     
+    
     .boton-agregar,
     .boton-quitar,
-    .boton-vaciar {
+    .boton-vaciar,
+    .boton-comprar {
         display: inline-block;
         padding: 5px 10px;
         background-color: #007bff;
         color: #fff;
         text-decoration: none;
         border-radius: 3px;
+        margin-top: 5px;
     }
     
     .boton-agregar:hover,
     .boton-quitar:hover,
-    .boton-vaciar:hover {
+    .boton-vaciar:hover
+    .boton-comprar:hover {
         background-color: #0056b3;
     }
 </style>
@@ -109,8 +113,27 @@
            </tr>
             </table>
         </div>
+        
+        <style>
+            .carrito-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        
+            .carrito-container .boton-vaciar,
+            .carrito-container .boton-comprar {
+                margin: 10px;
+            }
+        </style>
+        
         <div class="carrito-container">
             <a href="{% url 'VACIAR' %}" class="boton-vaciar">Vaciar carrito</a>
+        <form method="post" action="{% url 'comprar' %}">
+            {% csrf_token %}
+            <button type="submit" class="boton-comprar">Comprar</button>
+        </form>
         </div>
         {% endblock contenidos %}
     </main>

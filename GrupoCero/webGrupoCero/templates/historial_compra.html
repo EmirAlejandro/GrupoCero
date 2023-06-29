@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/galeria-blog.css' %}">
+{% endblock css %}
+
+<body>
+    <!--seccion cuerpo de la pagina-->
+    <main>
+        {% block contenidos %}
+        <!--banner-->
+        <section id="banner">
+            <img src="{% static 'img/Nighthawks_by_Edward_Hopper_1942.jpg' %}" alt="">
+            <div class="contenedor">
+                <h2>El arte no cambia nada, el arte te cambia a ti</h2>
+                <p></p>
+            </div>
+        </section>
+
+        <!--bienvenida-->
+        <section id="bienvenido">
+            <h2>Bienvenido</h2>
+            <p> a tu carrito de compras y disfruta de nuestra bellas obras de arte
+            </p>
+        </section>
+
+        <h2>Historial de Compras</h2>
+        <div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Obras</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for compra in historial %}
+            <tr>
+                <td>{{ compra.usuario }}</td>
+                <td>
+                    <ul>
+                        {% for obra in compra.obras.all %}
+                        <li>{{ obra.nombre }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>${{ compra.total|intcomma }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No se encontraron compras.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+        {% endblock contenidos %}
+    </main>
+
+    <footer>
+        <!-- Código existente -->
+    </footer>
+</body>
+
+</html>

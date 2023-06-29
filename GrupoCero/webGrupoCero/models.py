@@ -34,3 +34,12 @@ class Galeria(models.Model):
     
     def __str__(self) -> str :
         return str(self.idFoto)+ " "+str(self.obra.nombre)
+
+
+class Compra(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    obras = models.ManyToManyField(Obra)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Compra del usuario {self.usuario.username} - Total: ${self.total}"
